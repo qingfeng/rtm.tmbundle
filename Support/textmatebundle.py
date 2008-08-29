@@ -6,18 +6,31 @@ Copyright (c) 2008 QingFeng. All rights reserved.
 """
 
 __author__ = 'Qing Feng <paradise.qingfeng@gmail.com>'
+
 from rtm import createRTM
 from string import Template
+from datetime import datetime
 
 API_KEY = "4a2ce417fc9ea4ea5e2caeb137625e3e"
 SECRET = "188b0622533f7fc8"
 
 def item_html(*args):
+    name,duetime,priority=args
+    if duetime<>"":
+        duetime=datetime.strptime(duetime,"%Y-%m-%dT%H:%M:%SZ")
+    priority_colors = {
+     "1":"background-color:#EA5200",
+     "2":"background-color:#0060BF",
+     "3":"background-color:#359AFF",
+    }
+    color=priority_colors.get(priority,"background-color:#FFFFFF")
     s='''
     <tr>
-    <td>%s</td><td>%s</td><td>%s</td>
+     <td width="5" style="%(color)s">&nbsp;</td>
+     <td width="400">%(name)s</td>
+     <td>%(duetime)s</td>
     </tr>
-    '''%args
+    '''%locals()
     return s
 
 def getTasks(rtm):
@@ -27,7 +40,7 @@ def getTasks(rtm):
                 if tt.task.completed=="":
                     name=eval("u'%s'"%tt.name)
                     # print name,tt.task.has_due_time,tt.task.priority
-                    yield (name.encode("utf8"),tt.task.has_due_time,tt.task.priority)
+                    yield (name.encode("utf8"),tt.task.due,tt.task.priority)
         except AttributeError:
             pass
 def main():
@@ -36,7 +49,9 @@ def main():
     print """
     <table>
     <tr>
-    <td>Task</td><td>Has due time</td><td>priority</td>
+     <th>&nbsp;</th>
+     <th>Task</th>
+     <th>Has due time</th>
     </tr>
     """
     for task in getTasks(rtm):
