@@ -8,7 +8,6 @@ Copyright (c) 2008 QingFeng. All rights reserved.
 __author__ = 'Qing Feng <paradise.qingfeng@gmail.com>'
 
 from rtm import createRTM
-from string import Template
 from datetime import datetime
 
 API_KEY = "4a2ce417fc9ea4ea5e2caeb137625e3e"
