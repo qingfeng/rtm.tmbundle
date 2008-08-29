@@ -27,7 +27,7 @@ def item_html(*args):
     s='''
     <tr>
      <td width="5" style="%(color)s">&nbsp;</td>
-     <td width="400">%(name)s</td>
+     <td>%(name)s</td>
      <td>%(duetime)s</td>
     </tr>
     '''%locals()
@@ -50,8 +50,8 @@ def main():
     <table>
     <tr>
      <th>&nbsp;</th>
-     <th>Task</th>
-     <th>Has due time</th>
+     <th align="left">Task</th>
+     <th align="left">Has due time</th>
     </tr>
     """
     for task in getTasks(rtm):
