@@ -8,6 +8,8 @@
 	<string>"${TM_PYTHON:-python}" "$TM_BUNDLE_SUPPORT/textmatebundle.py"</string>
 	<key>input</key>
 	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^T</string>
 	<key>name</key>
 	<string>Fetch Tasks</string>
 	<key>output</key>
